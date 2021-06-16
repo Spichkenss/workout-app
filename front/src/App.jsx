@@ -1,12 +1,21 @@
 import React from 'react'
-import Layout from './components/common/Layout'
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
+
 import Home from './components/pages/Home/Home'
+import NewWorkout from './components/pages/NewWorkout/NewWorkout'
 
 const App = () => {
 	return (
-		<Layout>
-			<Home />
-		</Layout>
+		<Router>
+			<Switch>
+				<Route path='/' exact={true}>
+					<Home />
+				</Route>
+				<Route path='/new-workout'>
+					<NewWorkout />
+				</Route>
+			</Switch>
+		</Router>
 	)
 }
 

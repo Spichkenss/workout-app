@@ -1,15 +1,25 @@
 import React from 'react'
-import styles from './Header.module.scss'
-
-import userImage from '../../../images/header/user.svg'
+import { useHistory } from 'react-router'
 import Hamburger from './Hamburger/Hamburger'
 
+import styles from './Header.module.scss'
+import userImage from '../../../images/header/user.svg'
+import arrowImage from '../../../images/header/arrow.svg'
+
 const Header = () => {
+	const { location, goBack } = useHistory()
+
 	return (
 		<header className={styles.header}>
-			<button type='button'>
-				<img src={userImage} alt='Auth' />
-			</button>
+			{location.pathname !== '/' ? (
+				<button type='button' onClick={() => goBack()}>
+					<img src={arrowImage} alt='back' />
+				</button>
+			) : (
+				<button type='button'>
+					<img src={userImage} alt='Auth' />
+				</button>
+			)}
 			<Hamburger />
 		</header>
 	)

@@ -11,7 +11,7 @@ const Home = () => {
 	const history = useHistory()
 
 	return (
-		<Layout height='100%' bgImage={bgImage}>
+		<Layout bgImage={bgImage}>
 			<Button
 				text='New'
 				type='main'

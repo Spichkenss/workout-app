@@ -7,7 +7,8 @@ import userImage from '../../../images/header/user.svg'
 import arrowImage from '../../../images/header/arrow.svg'
 
 const Header = () => {
-	const { location, goBack } = useHistory()
+	const history = useHistory()
+	const { location, goBack } = history
 
 	return (
 		<header className={styles.header}>
@@ -16,7 +17,7 @@ const Header = () => {
 					<img src={arrowImage} alt='back' />
 				</button>
 			) : (
-				<button type='button'>
+				<button type='button' onClick={() => history.push('/auth')}>
 					<img src={userImage} alt='Auth' />
 				</button>
 			)}

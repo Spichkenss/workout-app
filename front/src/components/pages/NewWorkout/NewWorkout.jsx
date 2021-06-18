@@ -7,8 +7,6 @@ import bgImage from '../../../images/new-workout-bg.jpg'
 import Field from '../../ui/Field/Field'
 import Button from '../../ui/Button/Button'
 
-import styles from './NewWorkout.module.scss'
-
 const NewWorkout = () => {
 	const [name, setName] = React.useState('')
 	const [exercises, setExercises] = React.useState([])
@@ -20,7 +18,7 @@ const NewWorkout = () => {
 	return (
 		<>
 			<Layout bgImage={bgImage} heading='Create new workout' />
-			<div className={styles.wrapper}>
+			<div className='wrapper-inner-page'>
 				<form onSubmit={handleSubmit}>
 					<Field
 						placeholder='Enter name'

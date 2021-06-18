@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 
 import Home from './components/pages/Home/Home'
 import NewWorkout from './components/pages/NewWorkout/NewWorkout'
+import Auth from './components/pages/Auth/Auth'
 
 const App = () => {
 	return (
@@ -13,6 +14,9 @@ const App = () => {
 				</Route>
 				<Route path='/new-workout'>
 					<NewWorkout />
+				</Route>
+				<Route path='/auth'>
+					<Auth />
 				</Route>
 			</Switch>
 		</Router>

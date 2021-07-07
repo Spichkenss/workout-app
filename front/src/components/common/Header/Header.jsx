@@ -1,14 +1,17 @@
-import React from 'react'
 import { useHistory } from 'react-router'
 import Hamburger from './Hamburger/Hamburger'
 
 import styles from './Header.module.scss'
 import userImage from '../../../images/header/user.svg'
+import authImage from '../../../images/header/dumbbell.svg'
 import arrowImage from '../../../images/header/arrow.svg'
+import { useAuth } from '../../../hooks/useAuth'
 
 const Header = () => {
 	const history = useHistory()
 	const { location, goBack } = history
+
+	const { isAuth } = useAuth()
 
 	return (
 		<header className={styles.header}>
@@ -17,8 +20,11 @@ const Header = () => {
 					<img src={arrowImage} alt='back' />
 				</button>
 			) : (
-				<button type='button' onClick={() => history.push('/auth')}>
-					<img src={userImage} alt='Auth' />
+				<button
+					type='button'
+					onClick={() => history.push(isAuth ? '/profile' : '/auth')}
+				>
+					<img src={isAuth ? authImage : userImage} alt='Auth' height='40' />
 				</button>
 			)}
 			<Hamburger />

@@ -30,6 +30,7 @@ const Hamburger = () => {
 					alt='Menu'
 					draggable={false}
 					height='24'
+					width='27'
 				/>
 			</button>
 			<nav

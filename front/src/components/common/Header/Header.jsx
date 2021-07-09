@@ -17,7 +17,13 @@ const Header = () => {
 		<header className={styles.header}>
 			{location.pathname !== '/' ? (
 				<button type='button' onClick={() => goBack()}>
-					<img src={arrowImage} alt='back' draggable={false} />
+					<img
+						src={arrowImage}
+						width='29'
+						height='23'
+						alt='back'
+						draggable={false}
+					/>
 				</button>
 			) : (
 				<button
@@ -28,6 +34,7 @@ const Header = () => {
 						src={isAuth ? authImage : userImage}
 						alt='Auth'
 						height='40'
+						width='40'
 						draggable={false}
 					/>
 				</button>

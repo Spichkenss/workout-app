@@ -26,6 +26,14 @@ if (process.env.NODE_ENV === 'development') app.use(morgan('dev'))
 app.use(express.json())
 
 const __dirname = path.resolve()
+
+// Step 1:
+app.use(express.static(path.resolve(__dirname, './front/build')))
+// Step 2:
+app.get('*', function (request, response) {
+	response.sendFile(path.resolve(__dirname, './front/build', 'index.html'))
+})
+
 app.use('/uploads', express.static(path.join(__dirname, '/uploads/')))
 
 app.use('/api/users', userRoutes)

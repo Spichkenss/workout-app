@@ -28,6 +28,7 @@ const Hamburger = () => {
 				<img
 					src={isComponentVisible ? hamburgerCloseImage : hamburgerImage}
 					alt='Menu'
+					draggable={false}
 					height='24'
 				/>
 			</button>

@@ -27,12 +27,12 @@ const Profile = () => {
 		<>
 			<div
 				className={`${stylesLayout.wrapper} ${stylesLayout.otherPage}`}
-				style={{ backgroundImage: `url(${bgImage})` }}
+				style={{ backgroundImage: `url(${bgImage})`, height: 356 }}
 			>
 				<Header />
 
 				<div className={styles.center}>
-					<img src={userImage} alt='Profile' height='56' />
+					<img src={userImage} alt='Profile' height='56' draggable={false} />
 					{isSuccess && <h1 className={stylesLayout.heading}>{data.email}</h1>}
 				</div>
 
@@ -41,7 +41,6 @@ const Profile = () => {
 						minutes={data.minutes}
 						workouts={data.workouts}
 						kgs={data.kgs}
-						type='profile'
 					/>
 				)}
 			</div>

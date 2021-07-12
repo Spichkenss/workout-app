@@ -12,7 +12,7 @@ import bgImage from '../../../images/new-exercise-bg.jpg'
 import { useMutation } from 'react-query'
 import { $api } from '../../../api/api'
 
-const data = ['chest', 'shoulders', 'biceps', 'legs', 'hit']
+const data = ['chest', 'shoulders', 'biceps', 'legs', 'hit', 'back']
 
 const NewExercise = () => {
 	const [name, setName] = useState('')

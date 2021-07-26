@@ -92,7 +92,9 @@ const SingleExercise = () => {
 					height: 356,
 				}}
 			>
-				<Header />
+				<Header
+					backLink={isSuccess ? `/workout/${data.workoutLog}` : '/workouts'}
+				/>
 
 				{isSuccess && (
 					<div className={styles.heading}>

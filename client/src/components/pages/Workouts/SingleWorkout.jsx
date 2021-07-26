@@ -59,7 +59,7 @@ const SingleWorkout = () => {
 				className={`${stylesLayout.wrapper} ${stylesLayout.otherPage}`}
 				style={{ backgroundImage: `url(${bgImage})`, height: 356 }}
 			>
-				<Header />
+				<Header backLink='/workouts' />
 
 				{isSuccess && (
 					<div>

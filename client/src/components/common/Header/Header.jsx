@@ -7,16 +7,16 @@ import authImage from '../../../images/header/dumbbell.svg'
 import arrowImage from '../../../images/header/arrow.svg'
 import { useAuth } from '../../../hooks/useAuth'
 
-const Header = () => {
+const Header = ({ backLink }) => {
 	const history = useHistory()
-	const { location, goBack } = history
+	const { location } = history
 
 	const { isAuth } = useAuth()
 
 	return (
 		<header className={styles.header}>
 			{location.pathname !== '/' ? (
-				<button type='button' onClick={() => goBack()}>
+				<button type='button' onClick={() => history.push(backLink || '/')}>
 					<img
 						src={arrowImage}
 						width='29'

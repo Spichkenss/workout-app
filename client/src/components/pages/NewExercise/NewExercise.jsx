@@ -43,7 +43,11 @@ const NewExercise = () => {
 
 	return (
 		<>
-			<Layout bgImage={bgImage} heading='Create new exercise' />
+			<Layout
+				bgImage={bgImage}
+				heading='Create new exercise'
+				backLink='/new-workout'
+			/>
 			<div className='wrapper-inner-page'>
 				{error && <Alert type='error' text={error} />}
 				{isSuccess && <Alert text='Exercise created' />}
@@ -73,6 +77,7 @@ const NewExercise = () => {
 								})}
 								onClick={() => setImageName(name)}
 								draggable={false}
+								height='45'
 							/>
 						))}
 					</div>

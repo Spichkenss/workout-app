@@ -15,6 +15,7 @@ import checkCompletedImage from '../../../images/exercises/check-completed.svg'
 
 import styles from './Exercises.module.scss'
 import stylesLayout from '../../common/Layout.module.scss'
+import Loader from '../../ui/Loader'
 
 const getRandomInt = (min, max) => {
 	min = Math.ceil(min)
@@ -32,15 +33,12 @@ const SingleExercise = () => {
 		setBgImage(getRandomInt(1, 2) === 1 ? bgImage1 : bgImage2)
 	}, [])
 
-	const { data, isSuccess, refetch } = useQuery(
+	const { data, isSuccess, refetch, isLoading } = useQuery(
 		'get exercise log',
 		() =>
 			$api({
 				url: `/exercises/log/${id}`,
-			}),
-		{
-			refetchOnWindowFocus: false,
-		}
+			})
 	)
 
 	const { mutate: changeState, error: errorChange } = useMutation(
@@ -76,7 +74,8 @@ const SingleExercise = () => {
 	useEffect(() => {
 		if (
 			isSuccess &&
-			data.times.length === data.times.filter(time => time.completed).length
+			data.times.length === data.times.filter(time => time.completed).length &&
+			data._id === id
 		) {
 			setExCompleted()
 		}
@@ -116,7 +115,9 @@ const SingleExercise = () => {
 					{errorChange && <Alert type='error' text={errorChange} />}
 					{errorCompleted && <Alert type='error' text={errorCompleted} />}
 				</div>
-				{isSuccess ? (
+				{isLoading || (isSuccess && data._id !== id) ? (
+					<Loader />
+				) : (
 					<div className={styles.wrapper}>
 						<div className={styles.row}>
 							<div>
@@ -136,7 +137,10 @@ const SingleExercise = () => {
 								})}
 								key={`time ${idx}`}
 							>
-								<div className={styles.opacity}>
+								<div
+									className={styles.opacity}
+									key={`Prev ${idx}/${item.prevWeight}`}
+								>
 									<input
 										type='number'
 										defaultValue={item.prevWeight}
@@ -150,7 +154,7 @@ const SingleExercise = () => {
 									/>
 								</div>
 
-								<div>
+								<div key={`RepeatWeight ${idx}/${item.weight}`}>
 									<input
 										type='tel'
 										pattern='[0-9]*'
@@ -185,7 +189,7 @@ const SingleExercise = () => {
 									/>
 								</div>
 
-								<div>
+								<div key={`Completed ${idx}/${item.completed}`}>
 									<img
 										src={item.completed ? checkCompletedImage : checkImage}
 										className={styles.checkbox}
@@ -202,7 +206,9 @@ const SingleExercise = () => {
 							</div>
 						))}
 					</div>
-				) : (
+				)}
+
+				{isSuccess && data?.times?.length === 0 && (
 					<Alert type='warning' text='Times not found' />
 				)}
 			</div>

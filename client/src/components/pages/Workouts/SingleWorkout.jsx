@@ -10,20 +10,16 @@ import styles from './SingleWorkout.module.scss'
 import stylesLayout from '../../common/Layout.module.scss'
 import { $api } from '../../../api/api'
 import { useParams } from 'react-router-dom'
+import Loader from '../../ui/Loader'
 
 const SingleWorkout = () => {
 	const { id } = useParams()
 	const history = useHistory()
 
-	const { data, isSuccess } = useQuery(
-		'get workout',
-		() =>
-			$api({
-				url: `/workouts/log/${id}`,
-			}),
-		{
-			refetchOnWindowFocus: false,
-		}
+	const { data, isSuccess, isLoading } = useQuery('get workout', () =>
+		$api({
+			url: `/workouts/log/${id}`,
+		})
 	)
 
 	const { mutate: setWorkoutCompleted, error: errorCompleted } = useMutation(
@@ -46,7 +42,8 @@ const SingleWorkout = () => {
 			isSuccess &&
 			data?.exerciseLogs &&
 			data.exerciseLogs.length ===
-				data.exerciseLogs.filter(log => log.completed).length
+				data.exerciseLogs.filter(log => log.completed).length &&
+			data._id === id
 		) {
 			setWorkoutCompleted()
 		}
@@ -75,7 +72,9 @@ const SingleWorkout = () => {
 				<div style={{ width: '90%', margin: '0 auto' }}>
 					{errorCompleted && <Alert type='error' text={errorCompleted} />}
 				</div>
-				{isSuccess ? (
+				{isLoading || (isSuccess && data._id !== id) ? (
+					<Loader />
+				) : (
 					<div className={styles.wrapper}>
 						{data.exerciseLogs.map((exLog, idx) => {
 							return (
@@ -98,12 +97,16 @@ const SingleWorkout = () => {
 											/>
 										</button>
 									</div>
-									{idx % 2 !== 0 && <div className={styles.line}></div>}
+									{idx % 2 !== 0 && idx !== data.exerciseLogs.length - 1 && (
+										<div className={styles.line}></div>
+									)}
 								</Fragment>
 							)
 						})}
 					</div>
-				) : (
+				)}
+
+				{isSuccess && data?.length === 0 && (
 					<Alert type='warning' text='Exercises not found' />
 				)}
 			</div>

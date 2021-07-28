@@ -53,7 +53,7 @@ const ListWorkouts = () => {
 				{error && <Alert type='error' text={error} />}
 				{isSuccessMutate && <Alert text='Workout log created' />}
 				{isLoading && <Loader />}
-				{isSuccess ? (
+				{isSuccess && (
 					<div className={styles.wrapper}>
 						{data.map((workout, idx) => (
 							<div className={styles.item} key={`workout ${idx}`}>
@@ -70,7 +70,8 @@ const ListWorkouts = () => {
 							</div>
 						))}
 					</div>
-				) : (
+				)}
+				{isSuccess && data?.length === 0 && (
 					<Alert type='warning' text='Workouts not found' />
 				)}
 			</div>

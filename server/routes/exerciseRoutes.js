@@ -1,6 +1,9 @@
 import express from 'express'
 import { createNewExerciseLog } from '../controllers/exercise/log/createController.js'
-import { getExerciseLog } from '../controllers/exercise/log/getController.js'
+import {
+	getExerciseLog,
+	getExerciseLogList,
+} from '../controllers/exercise/log/getController.js'
 import {
 	updateExerciseLog,
 	updateCompleteExerciseLog,
@@ -24,6 +27,7 @@ router
 
 router
 	.route('/log')
+	.get(protect, getExerciseLogList)
 	.post(protect, createNewExerciseLog)
 	.put(protect, updateExerciseLog)
 

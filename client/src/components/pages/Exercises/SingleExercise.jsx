@@ -167,7 +167,7 @@ const SingleExercise = () => {
 													key: 'weight',
 													value: e.target.value,
 												}),
-											800
+											2000
 										)}
 										disabled={item.completed}
 									/>
